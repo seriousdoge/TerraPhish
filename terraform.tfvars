@@ -1,0 +1,6 @@
+aws_access_key = ""
+aws_secret_key = ""
+key_name = ""
+domain_name = ""
+key_path = ""
+dkim_value = ""

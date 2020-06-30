@@ -1,0 +1,6 @@
+https://rastamouse.me/2017/08/automated-red-team-infrastructure-deployment-with-terraform-part-1/
+https://ired.team/offensive-security/red-team-infrastructure/automating-red-team-infrastructure-with-terraform
+https://www.linode.com/docs/email/postfix/configure-spf-and-dkim-in-postfix-on-debian-9/
+https://learn.hashicorp.com/terraform#getting-started
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-dkim-with-postfix-on-debian-wheezy
+https://certbot.eff.org/docs/using.html
