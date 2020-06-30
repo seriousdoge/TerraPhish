@@ -22,6 +22,8 @@ key_path | Path to your private key, which should be in PEM encoded format (Open
 key_name | Name of the key pair within your AWS account. Create one before using.
 dkim_value | DKIM Value which will later be inserted as a DNS TXT record, in YYYYMM format. 
 
+Create a key pair in AWS and change the key name on line 39 in master.tf to your keypair name. 
+
 **Usage**
 
 1. terraform init
