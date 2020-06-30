@@ -37,6 +37,8 @@ The Terraform script creates three individual security groups, for SSH, TLS, and
 
 It is also recommended to create a separate IAM role (administrator privileges recommended) to use for this setup. 
 
+If your domain is from a different registrar, you would need to change the nameservers there to AWS' nameservers. 
+
 Lastly, the DKIM value to be inserted as a TXT record in your DNS settings will be generated when the script finishes execution. The value will be stored under /opt/DKIM/$dkim_value.txt (defined as a variable above). AWS doesn't allow the entire value to be inserted as is, so you would have to break that into multiple parts using quotes ("). 
 
 Example: YYYYMM._domainkey.example.com.         "v=DKIM1; h=sha256; k=rsa; s=email; p=XXXXXXXXXXXXXXXXXXXXXXXXXXXX" "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX""XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
