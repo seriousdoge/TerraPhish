@@ -1,6 +1,6 @@
 # TerraPhish
 
-GoPhish on AWS implementation using Terraform. 
+GoPhish on AWS implementated using Terraform. 
 
 The script creates an EC2 instance with Ubuntu 16.04 LTS_x64 ami (you can change this if you want to, however it may break some functionality). DNS records for mail reputation such as SPF and DMARC are created automaticaly, except DKIM TXT record (discussed below). Other configurations include:
 * LetsEncrypt: Automatically fetches a certificate and configures it to use with goPhish
