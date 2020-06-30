@@ -36,7 +36,7 @@ resource "aws_instance" "Ubuntu_x64" {
   associate_public_ip_address= "true"
   key_name = var.key_name
   tags = {
-    Name = "my_key"
+    Name = "your key pair name in aws"
   }
  
   connection {
