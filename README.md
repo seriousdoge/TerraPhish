@@ -33,7 +33,7 @@ Create a key pair in AWS and change the key name on line 39 in master.tf to your
 
 **Important Notes**
 
-The Terraform script creates three individual security groups, for SSH, TLS, and HTTP which is required for certbot HTTP challenge. You can remove the allow_http security group once the setup is done and if you dont intent to use it. 
+The Terraform script creates three individual security groups, for SSH, TLS, and HTTP which is required for certbot HTTP challenge. You can remove the allow_http security group once the setup is done and if you dont intend to use it. 
 
 It is also recommended to create a separate IAM role (administrator privileges recommended) to use for this setup. 
 
