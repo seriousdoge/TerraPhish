@@ -2,6 +2,7 @@
 apt update
 DEBIAN_FRONTEND=noninteractive apt install postfix -y
 DEBIAN_FRONTEND=noninteractive apt install opendkim opendkim-tools postfix-policyd-spf-python  -y
+DEBIAN_FRONTEND=noninteractive apt install nginx -y
 
 echo 'policyd-spf  unix  -       n       n       -       0       spawn
     user=policyd-spf argv=/usr/bin/policyd-spf' >> /etc/postfix/master.cf
@@ -10,16 +11,22 @@ echo 'policyd-spf_time_limit = 3600
 smtpd_recipient_restrictions =
         check_policy_service unix:private/policyd-spf,' >> /etc/postfix/main.cf
 
-wget https://dl.eff.org/certbot-auto
-chmod a+x certbot-auto
-mv certbot-auto /usr/local/bin
-certbot-auto certonly --standalone --noninteractive --agree-tos --email admin@$1 -d $1
+snap install core;snap refresh core
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
+
+
+sleep 1m
+certbot certonly --nginx --noninteractive --agree-tos --email admin@$1 -d $1
+
+
+#certbot-auto certonly --nginx --noninteractive --agree-tos --email admin@$1 -d $1
 apt install unzip -y
 mkdir /opt/gophish
 cd /opt/gophish
-wget https://github.com/gophish/gophish/releases/download/v0.10.1/gophish-v0.10.1-linux-64bit.zip
+wget https://github.com/gophish/gophish/releases/download/v0.11.0/gophish-v0.11.0-linux-64bit.zip
 
-unzip gophish-v0.10.1-linux-64bit.zip
+unzip gophish-v0.11.0-linux-64bit.zip
 
 echo '{
      "admin_server" : {
