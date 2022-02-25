@@ -28,24 +28,41 @@ provider "aws" {
 #RESOURCES
 ####################
 
-resource "aws_instance" "Ubuntu_x64" {
-  ami           = "ami-008320af74136c628"
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = "${aws_instance.UbuntuVM.id}"
+  allocation_id = "${aws_eip.eip_assoc.id}"
+}
+resource "aws_instance" "UbuntuVM" {
+  ami           = "ami-07d8796a2b0f8d29c"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.allow_ssh.id}","${aws_security_group.allow_tls.id}","${aws_security_group.allow_http.id}"]
   subnet_id = "${aws_subnet.public.id}"
   associate_public_ip_address= "true"
   key_name = var.key_name
   tags = {
-    Name = "your key pair name in aws"
+    Name = "my_key"
   }
- 
+}
+
+resource "time_sleep" "wait_60_seconds" {
+  depends_on = [
+    aws_instance.UbuntuVM
+  ]
+  create_duration = "60s"
+}
+ resource "null_resource" "setup_gophish" {
+
+  depends_on = [
+    time_sleep.wait_60_seconds
+  ]
   connection {
-      host = self.public_ip
+      host = "${aws_eip.eip_assoc.public_ip}"
       type = "ssh"
       user = "ubuntu"
       private_key = "${file(var.key_path)}"
       timeout     = "1m"
-      agent = false
+      agent = "false"
     }
   provisioner "file" {
     source      = "script.sh"
@@ -58,7 +75,9 @@ resource "aws_instance" "Ubuntu_x64" {
     ]
   }
  }
-
+resource "aws_eip" "eip_assoc" {
+ vpc      = true
+}
 resource "aws_vpc" "mainvpc" {
   cidr_block = "10.1.0.0/16"
 }
@@ -170,10 +189,6 @@ resource "aws_security_group" "allow_tls" {
   }
 }
 
-resource "aws_eip" "elastic_ip" {
-  instance = "${aws_instance.Ubuntu_x64.id}"
-  vpc      = true
-}
 
 resource "aws_route53_record" "www" {
 
@@ -181,7 +196,7 @@ resource "aws_route53_record" "www" {
      name    = var.domain_name
      type    = "A"
      ttl = "300"
-     records = ["${aws_instance.Ubuntu_x64.public_ip}"]
+     records = ["${aws_eip.eip_assoc.public_ip}"]
 }
 
 resource "aws_route53_record" "mail_record" {
@@ -217,5 +232,5 @@ data "aws_route53_zone" "main" {
 }
 
 output "instance_ips" {
-  value = ["${aws_instance.Ubuntu_x64.public_ip}"]
+  value = ["${aws_eip.eip_assoc.public_ip}"]
 }
