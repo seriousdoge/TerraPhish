@@ -35,7 +35,7 @@ Create a key pair in AWS and change the key name on line 39 in master.tf to your
 
 The Terraform script creates three individual security groups, for SSH, TLS, and HTTP which is required for certbot HTTP challenge. You can remove the allow_http security group once the setup is done and if you dont intend to use it. 
 
-It is also recommended to include your public IP in ash security group instead of default 0.0.0.0/0 
+It is also recommended to include your public IP in ssh security group instead of default 0.0.0.0/0 
 
 If your domain is from a different registrar, you would need to change the nameservers there to AWS' nameservers. 
 
