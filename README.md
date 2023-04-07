@@ -43,7 +43,3 @@ Lastly, the DKIM value to be inserted as a TXT record in your DNS settings will 
 
 Example: YYYYMM._domainkey.example.com.         "v=DKIM1; h=sha256; k=rsa; s=email; p=XXXXXXXXXXXXXXXXXXXXXXXXXXXX" "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX""XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-**To do**
-
-1. Implement some AWS terraform best practices. 
-1. Figure out a way to set DKIM record automatically. (local-exec ?)
